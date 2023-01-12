@@ -1,17 +1,15 @@
 package com.youcode.youbooking.Entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.io.Serializable;
 
 
 @Entity
-@Data @AllArgsConstructor @NoArgsConstructor @ToString
-public abstract class Users implements Serializable {
+@Table
+@Data @AllArgsConstructor @NoArgsConstructor @ToString @Getter @Setter
+public  class Users implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +19,7 @@ public abstract class Users implements Serializable {
     private String email;
     private String password;
     private String telephone;
-    @ManyToOne
+   @Enumerated(EnumType.STRING)
     private Role role;
 
 }

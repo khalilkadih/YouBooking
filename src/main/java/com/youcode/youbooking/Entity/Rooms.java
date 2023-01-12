@@ -1,24 +1,29 @@
 package com.youcode.youbooking.Entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
 
 @Entity
-@Data @AllArgsConstructor @NoArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
 public class Rooms implements Serializable {
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Status status;
+    private String name;
+    private String description;
     private float prix;
     private int capacity;
+    @Enumerated(EnumType.STRING)
+    private Status status;
     @ManyToOne
-    private  Hotels hotels;
-    @OneToMany
-    private  Reservation reservation;
+    @JoinColumn
+    private Hotels hotels;
+
 
 }

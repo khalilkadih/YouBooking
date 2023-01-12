@@ -1,27 +1,37 @@
 package com.youcode.youbooking.Entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.context.annotation.Lazy;
 
-import java.util.List;
+import java.util.Optional;
 
 @Entity
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 
 public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long RefRservation;
 
-    @OneToMany
-    private List<Client> client;
-
     @ManyToOne
-    private List<Rooms> rooms;
+    @JoinColumn
+    private Users client;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn
+    private Rooms rooms;
+
     private double total;
     private String dateDebut;
     private String dateFin;
+    @Enumerated(EnumType.STRING)
+    private ReservationStatus reservationStatus;
+
+
 
 }

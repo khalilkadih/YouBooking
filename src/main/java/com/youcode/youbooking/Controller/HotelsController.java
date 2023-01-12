@@ -1,10 +1,11 @@
-package com.youcode.youbooking.Contreoller;
+package com.youcode.youbooking.Controller;
 
 import com.youcode.youbooking.Entity.Hotels;
 import com.youcode.youbooking.Services.HotelSerevice;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -22,7 +23,10 @@ public class HotelsController {
         return hotelSerevice.HOTELS();
     }
 
-
+    @GetMapping("/find-by-id/{id}")
+    public Optional<Hotels> findHotelById(@PathVariable("id") long id){
+        return hotelSerevice.findHotelsById(id);
+    }
     @PostMapping("/add-hotel")
     public Hotels addHotel(@RequestBody Hotels hotel){
         return hotelSerevice.addHotels(hotel);

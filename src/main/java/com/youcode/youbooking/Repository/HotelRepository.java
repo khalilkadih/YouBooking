@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface HotelRepository extends JpaRepository<Hotels, Long> {
     Hotels findByName(String nameHotel);
-    Hotels findByCodePostale(String codePostal);
     Hotels findByVille(String ville);
 
 }
