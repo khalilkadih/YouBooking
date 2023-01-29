@@ -10,7 +10,7 @@ public interface UserService {
     List<Users> USERS_LIST();
     Users addUser(Users user);
     Optional<Users> getUserById(Long id);
-    Optional<Users>getUserByName(String name);
+    Users getUserByName(String name);
     List<Users> getAllManager();
     List<Users> getAllClient();
     List<Users> getAllAdmin();

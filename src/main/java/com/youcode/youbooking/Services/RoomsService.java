@@ -4,6 +4,7 @@ import com.youcode.youbooking.Entity.Hotels;
 import com.youcode.youbooking.Entity.Rooms;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,7 +12,7 @@ import java.util.Optional;
 public interface RoomsService {
     List<Rooms> getAllRooms();
 
-    Rooms addRoom(Rooms rooms);
+    Rooms addRoom(Rooms rooms,Hotels hotels);
 
     Optional<Rooms> getRoomsById(Long id);
 
@@ -24,4 +25,6 @@ public interface RoomsService {
     List<Rooms> findByCapacity(Integer capacity);
 
     List<Rooms> findByPrix(Double prix);
+    boolean isRoomReserved(Long id);
+
 }

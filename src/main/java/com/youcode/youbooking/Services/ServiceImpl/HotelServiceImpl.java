@@ -2,9 +2,12 @@ package com.youcode.youbooking.Services.ServiceImpl;
 
 import com.youcode.youbooking.Entity.Hotels;
 import com.youcode.youbooking.Repository.HotelRepository;
+import com.youcode.youbooking.Repository.VilleRepository;
 import com.youcode.youbooking.Services.HotelSerevice;
-import jakarta.transaction.Transactional;
+import com.youcode.youbooking.dto.HotelDTO;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -13,9 +16,11 @@ import java.util.Optional;
 public class HotelServiceImpl implements HotelSerevice {
 
  private final HotelRepository hotelRepository;
+ private final VilleRepository villeRepository;
 
- public HotelServiceImpl(HotelRepository hotelRepository) {
+ public HotelServiceImpl(HotelRepository hotelRepository, VilleRepository villeRepository) {
   this.hotelRepository = hotelRepository;
+  this.villeRepository = villeRepository;
  }
 
  @Override
@@ -24,7 +29,11 @@ public class HotelServiceImpl implements HotelSerevice {
  }
 
  @Override
- public Hotels addHotels(Hotels hotel) {
+ public Hotels addHotels(HotelDTO hotelDTO) {
+  Hotels hotel=new Hotels();
+  hotel.setName(hotelDTO.getName());
+  hotel.setAdress(hotelDTO.getAdress());
+  hotel.setVille(villeRepository.findByNameVille(hotelDTO.getVilleName()));
   return hotelRepository.save(hotel);
  }
 

@@ -2,6 +2,7 @@ package com.youcode.youbooking.Controller;
 
 import com.youcode.youbooking.Entity.Hotels;
 import com.youcode.youbooking.Services.HotelSerevice;
+import com.youcode.youbooking.dto.HotelDTO;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/hotels")
+@CrossOrigin("http://localhost:4200/")
 public class HotelsController {
 
     private final HotelSerevice hotelSerevice;
@@ -28,8 +30,8 @@ public class HotelsController {
         return hotelSerevice.findHotelsById(id);
     }
     @PostMapping("/add-hotel")
-    public Hotels addHotel(@RequestBody Hotels hotel){
-        return hotelSerevice.addHotels(hotel);
+    public Hotels addHotel(@RequestBody HotelDTO hoteldto){
+        return hotelSerevice.addHotels(hoteldto);
     }
 
     @DeleteMapping("/delete-hotel/{id}")

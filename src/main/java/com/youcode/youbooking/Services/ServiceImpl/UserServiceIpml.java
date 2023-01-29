@@ -3,9 +3,14 @@ package com.youcode.youbooking.Services.ServiceImpl;
 import com.youcode.youbooking.Entity.Users;
 import com.youcode.youbooking.Repository.UserRepository;
 import com.youcode.youbooking.Services.UserService;
-import jakarta.transaction.Transactional;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,8 +40,8 @@ public class UserServiceIpml implements UserService {
     }
 
     @Override
-    public Optional<Users> getUserByName(String name) {
-        return Optional.ofNullable(userRepository.findByFname(name));
+    public Users getUserByName(String name) {
+        return (userRepository.findByFname(name));
     }
 
     @Override
@@ -66,6 +71,22 @@ public class UserServiceIpml implements UserService {
 
     @Override
     public Users findByEmail(String email) {
-        return userRepository.findByEmail(email);
+
+        return userRepository.findByEmail(email).orElseThrow(()->new RuntimeException("user not found"));
     }
+
+
+
+
+
+
+    /*///////////////////////////////////////////////////*/
+
+
+
+      private final static List<UserDetails> USER_APPLICATION= Arrays.asList(
+            new User("khalil@gmail.com","khalil", Collections.singleton(new SimpleGrantedAuthority("ADMIN"))),
+            new User("omar@gmail.com","omar", Collections.singleton(new SimpleGrantedAuthority("USER"))),
+            new User("omar@gmail.com","omar", Collections.singleton(new SimpleGrantedAuthority("Fournisseur")))
+    );
 }

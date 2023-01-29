@@ -1,10 +1,11 @@
 package com.youcode.youbooking.Entity;
 
-import jakarta.persistence.*;
-import lombok.*;
-import org.springframework.context.annotation.Lazy;
+import org.springframework.data.annotation.Id;
 
-import java.util.Optional;
+import javax.persistence.*;import lombok.*;
+
+import java.sql.Date;
+
 
 @Entity
 @Data
@@ -12,9 +13,8 @@ import java.util.Optional;
 @NoArgsConstructor
 @Getter
 @Setter
-
 public class Reservation {
-    @Id
+    @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long RefRservation;
 
@@ -29,6 +29,7 @@ public class Reservation {
     private double total;
     private String dateDebut;
     private String dateFin;
+    private int nombreRoomReserver;
     @Enumerated(EnumType.STRING)
     private ReservationStatus reservationStatus;
 

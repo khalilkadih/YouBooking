@@ -4,12 +4,15 @@ import com.youcode.youbooking.Entity.*;
 import com.youcode.youbooking.Services.HotelSerevice;
 import com.youcode.youbooking.Services.ReservationSerevice;
 import com.youcode.youbooking.Services.RoomsService;
+import com.youcode.youbooking.dto.ReservationDTO;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/client")
+@CrossOrigin
+
 public class ClientController {
 
     private final HotelSerevice hotelSerevice;
@@ -31,13 +34,13 @@ public class ClientController {
     public List<Rooms> findByHotelName(Hotels hotels){
         return (List<Rooms>) roomsService.getRoomsByHotels(hotels);
     }
-    @GetMapping("/find-by-hotels-ville")
-    public List<Hotels> findByHotelsVille(String ville){
+    @GetMapping("/find-by-hotels-ville/{ville}")
+    public List<Hotels> findByHotelsVille(@PathVariable String ville){
         return (List<Hotels>) hotelSerevice.findHotelByVille(ville);
     }
 
-    @GetMapping("/get-all-reservation-client")
-    public List<Reservation> getReservationClient(Users client){
+    @GetMapping("/get-all-reservation-client/{client}")
+    public List<Reservation> getReservationClient(@PathVariable Users client){
         return reservationSerevice.getReservationByClient(client);
     }
     @PutMapping("/update-reservation")
@@ -47,5 +50,10 @@ public class ClientController {
     @PutMapping("/annuler-reservation")
     public void annullerReservation(Long id){
          reservationSerevice.annullerReservation(id);
+    }
+    @PostMapping("/reservation")
+    public Reservation reservation(@RequestBody ReservationDTO reservationDTO){
+        return reservationSerevice.addResexrvations(reservationDTO);
+
     }
 }

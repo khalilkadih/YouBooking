@@ -1,7 +1,10 @@
 package com.youcode.youbooking.Entity;
 
-import jakarta.persistence.*;
-import lombok.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.data.annotation.Id;
+
+import javax.persistence.*;import lombok.*;
 
 import java.io.Serializable;
 
@@ -11,8 +14,10 @@ import java.io.Serializable;
 @Getter
 @Setter
 @ToString
+@JsonIgnoreProperties
+
 public class Rooms implements Serializable {
-    @Id
+    @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
@@ -23,6 +28,7 @@ public class Rooms implements Serializable {
     private Status status;
     @ManyToOne
     @JoinColumn
+    @JsonBackReference
     private Hotels hotels;
 
 

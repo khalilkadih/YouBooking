@@ -4,13 +4,13 @@ import com.youcode.youbooking.Entity.Hotels;
 import com.youcode.youbooking.Services.HotelSerevice;
 import com.youcode.youbooking.Services.ReservationSerevice;
 import com.youcode.youbooking.Services.RoomsService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.youcode.youbooking.dto.HotelDTO;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/Admin")
+@CrossOrigin("http://localhost:4200/")
+
 public class AdminController {
     private final HotelSerevice hotelSerevice;
     private final RoomsService roomsService;
@@ -23,7 +23,7 @@ public class AdminController {
     }
 
     @PostMapping("/add-hotels")
-    public Hotels addHotels(Hotels hotels){
+    public Hotels addHotels(HotelDTO hotels){
         return hotelSerevice.addHotels(hotels);
     }
 
