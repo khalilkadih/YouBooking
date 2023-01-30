@@ -40,7 +40,7 @@ public class AdminController {
     @GetMapping("/hi")
     public String siHello(){
         String hi="say hello";
-        return "hello from controllers is just for test jenkins"+hi;
+        return "hello from controllers is just for test jenkins";
 
     }
 
