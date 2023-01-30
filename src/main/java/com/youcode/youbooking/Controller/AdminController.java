@@ -31,5 +31,9 @@ public class AdminController {
     public Hotels updateHotels(Hotels hotels){
         return hotelSerevice.update(hotels);
     }
+    @GetMapping("/hello")
+    public String siHi(){
+        return "hello from controllers";
+    }
 
 }
