@@ -3,6 +3,7 @@ package com.youcode.youbooking.config;
 import com.youcode.youbooking.Entity.Role;
 import com.youcode.youbooking.Entity.Users;
 import com.youcode.youbooking.Repository.UserRepository;
+import lombok.var;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,7 +26,7 @@ public class AuthenticationService {
     }
 
     public ResponseDTO register(RegisterDTO request) {
-        var user = Users.builder()
+        Users user = Users.builder()
                 .fname(request.getFirstName())
                 .lname(request.getLastName())
                 .password(passwordEncoder.encode(request.getPassword()))
@@ -39,7 +40,7 @@ public class AuthenticationService {
 
     public ResponseDTO authenticate(ResponseDTO responseDTO) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(responseDTO.getEmail(), responseDTO.getPassword()));
-        var user = userRepository.findByEmail(responseDTO.getEmail()).orElseThrow();
+        Users user = userRepository.findByEmail(responseDTO.getEmail()).get();
         String jwtToken = jwtUtils.generateToken(user);
 
         return ResponseDTO.builder().token(jwtToken).build();
